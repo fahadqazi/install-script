@@ -4,6 +4,7 @@
 # Script to set up worker          #
 ####################################
 
+
 function already_installed(){
     if [ $(which $1) ]
     then 
@@ -13,7 +14,7 @@ function already_installed(){
 
 function update_upgrade(){
     echo
-    echo 'Update packages and upgrade system'
+    echo "${RED}Update packages and upgrade system"
     #apt-get update -y
 }
 
@@ -39,7 +40,7 @@ function install_git(){
         echo ">>>" Git is already installed
     else
         echo
-        echo 'Installing git'
+        echo Installing git
         #apt-get install git -y
     fi
 }
@@ -52,15 +53,15 @@ function install_node(){
         echo ">>>" Node already installed
     else
         echo
-        echo 'Installing Node Source'
+        echo Installing Node Source
         #curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 
         echo
-        echo 'Running Node Source script'
+        echo Running Node Source script
         #bash nodesource_setup.sh
 
         echo
-        echo 'Installing NodeJS'
+        echo Installing NodeJS
         #apt-get install nodejs
     fi
 
@@ -73,9 +74,17 @@ function install_build_essentials(){
 }
 
 function install_pm2(){
-    echo
-    echo 'Intalling PM2'
-    #npm i -g pm2
+    already_installed pm2
+    if [ $? -eq 0 ]
+    then
+        echo
+        echo ">>>" PM2 is already installed
+    else
+        echo
+        echo Intalling PM2
+        #npm i -g pm2
+    fi
+
 }
 
 update_upgrade
