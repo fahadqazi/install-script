@@ -1,45 +1,86 @@
-apt-get update -y
+#!/bin/bash
 
-echo 'Installing curl'
-apt-get install curl
+####################################
+# Script to set up worker          #
+####################################
 
-echo ''
-echo 'Installing git'
-apt-get install git -y
+function already_installed(){
+    if [ $(which $1) ]
+    then 
+        return 0
+    fi
+}
 
-echo ''
-echo 'Configure git'
-echo ''
+function update_upgrade(){
+    echo
+    echo 'Update packages and upgrade system'
+    #apt-get update -y
+}
 
-echo 'Enter the Global Username: ';
-read GITUSER;
-git config --global user.name "${GITUSER}"
+function install_curl(){
+    already_installed curl
+    if [ $? -eq 0 ]
+    then 
+        echo
+        echo ">>>" curl is already installed
+    else
 
-echo ''
-echo 'Enter the Global Email for Git: ';
-read GITEMAIL;
-git config --golbal user.email "${GITEMAIL}"
+        echo
+        echo Installing curl
+        #apt-get install curl
+    fi
+}
 
-echo 'Git has been configured'
-echo ''
-git config --list
-echo ''
+function install_git(){
+    already_installed git
+    if [ $? -eq 0 ]
+    then 
+        echo 
+        echo ">>>" Git is already installed
+    else
+        echo
+        echo 'Installing git'
+        #apt-get install git -y
+    fi
+}
 
-echo 'Installing Node Source'
-curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
+function install_node(){
+    already_installed node
+    if [ $? -eq 0 ]
+    then 
+        echo
+        echo ">>>" Node already installed
+    else
+        echo
+        echo 'Installing Node Source'
+        #curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 
-bash nodesource_setup.sh
+        echo
+        echo 'Running Node Source script'
+        #bash nodesource_setup.sh
 
-echo ''
-echo 'Installing NodeJS'
-apt-get install nodejs
+        echo
+        echo 'Installing NodeJS'
+        #apt-get install nodejs
+    fi
 
-echo ''
-echo 'Installing Build Essentials'
-apt-get install build-essential
+}
 
-echo ''
-echo 'Installing PM2'
-npm i -g pm2
+function install_build_essentials(){
+    echo
+    echo 'Installing Build Essentials'
+    #apt-get install build-essential
+}
 
+function install_pm2(){
+    echo
+    echo 'Intalling PM2'
+    #npm i -g pm2
+}
 
+update_upgrade
+install_curl
+install_git
+install_node
+install_build_essentials
+install_pm2
