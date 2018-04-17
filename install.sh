@@ -7,6 +7,21 @@
 
 USERNAME=origin-task-worker
 
+function program_is_installed(){
+    local return_=1
+    type $1 >/dev/null 2>&1 || { local return_=0; }
+    echo "$return_"
+}
+
+function npm_package_is_installed(){
+
+    local return_=1
+
+    ls node_modules | grep $1 >/dev/null 2>&1 || { local return_= 0; }
+    echo "$return_"
+
+}
+
 function add_new_user(){
     if [ "$UID" -ne "$ROOT_UID" ]
     then
@@ -29,10 +44,8 @@ function add_new_user(){
 
 
 function already_installed(){
-#    echo "Now checking $1"
-    #app=$(command $1)
-#    app=$(type node)
-#    echo $?
+    res=$(type -p $1)
+    echo "this is $res"
     if [[ 1 -ne 0 ]]
     then 
         return 1
@@ -49,6 +62,7 @@ function update_upgrade(){
 
 function install_curl(){
     already_installed curl
+    echo $?
     if [ $? -eq 0 ]
     then 
         echo
@@ -62,7 +76,8 @@ function install_curl(){
 }
 
 function install_node(){
-    already_installed nodejs
+    #already_installed nodejs
+    program_is_installed nodejs
     res=$?
     echo "comes back $?"
     echo "This is the result $res"
@@ -82,9 +97,9 @@ function install_node(){
 #        echo
         echo Installing NodeJS
         #apt-get install nodejs
-        apt-get update
-        apt-get install nodejs
-        apt-get install npm
+#        apt-get update
+#        apt-get install nodejs
+#        apt-get install npm
 
     fi
 
@@ -97,7 +112,9 @@ function install_build_essentials(){
 }
 
 function install_pm2(){
-    already_installed pm2
+    #already_installed pm2
+    npm_package_is_installed pm2
+
     if [ $? -eq 0 ]
     then
         echo
