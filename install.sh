@@ -29,6 +29,7 @@ function add_new_user(){
 
 
 function already_installed(){
+    echo "Now checking $1"
     app=$(command $1)
 
     if [[ "$app" -ne 0 ]]
