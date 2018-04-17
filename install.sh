@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# TODO: remove comments
 ####################################
 # Script to set up worker          #
 ####################################
@@ -51,19 +52,6 @@ function install_curl(){
         echo
         echo Installing curl
         #apt-get install curl
-    fi
-}
-
-function install_git(){
-    already_installed git
-    if [ $? -eq 0 ]
-    then 
-        echo 
-        echo ">>>" Git is already installed
-    else
-        echo
-        echo Installing git
-        #apt-get install git -y
     fi
 }
 
