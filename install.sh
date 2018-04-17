@@ -59,6 +59,8 @@ function install_curl(){
 
 function install_node(){
     already_installed node
+    echo $?
+    echo "comes back"
     if [ $? -eq 0 ]
     then 
         echo
