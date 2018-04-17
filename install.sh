@@ -29,9 +29,11 @@ function add_new_user(){
 
 
 function already_installed(){
-    if [ $(which $1) ]
+    app=$(command $1)
+
+    if [[ "$app" -ne 0 ]]
     then 
-        return 0
+        return 1
     fi
 }
 
@@ -62,17 +64,21 @@ function install_node(){
         echo
         echo ">>>" Node already installed
     else
-        echo
-        echo Installing Node Source
+#        echo
+#        echo Installing Node Source
         #curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 
-        echo
-        echo Running Node Source script
+#        echo
+#        echo Running Node Source script
         #bash nodesource_setup.sh
 
-        echo
+#        echo
         echo Installing NodeJS
         #apt-get install nodejs
+        apt-get update
+        apt-get install nodejs
+        apt-get install npm
+
     fi
 
 }
@@ -92,14 +98,13 @@ function install_pm2(){
     else
         echo
         echo Intalling PM2
-        #npm i -g pm2
+        npm i -g pm2
     fi
 
 }
 
-update_upgrade
-install_curl
-install_git
+#update_upgrade
+#install_curl
 install_node
-install_build_essentials
-install_pm2
+#install_build_essentials
+#install_pm2
