@@ -29,11 +29,14 @@ function add_new_user(){
 
 
 function already_installed(){
-    echo "Now checking $1"
-    app=$(command $1)
-
-    if [[ "$app" -ne 0 ]]
+#    echo "Now checking $1"
+    #app=$(command $1)
+#    app=$(type node)
+#    echo $?
+    if [[ 1 -ne 0 ]]
     then 
+        return 1
+    else
         return 1
     fi
 }
@@ -59,10 +62,11 @@ function install_curl(){
 }
 
 function install_node(){
-    already_installed node
-    echo $?
-    echo "comes back"
-    if [ $? -eq 0 ]
+    already_installed nodejs
+    res=$?
+    echo "comes back $?"
+    echo "This is the result $res"
+    if [ "$res" -eq 0 ]
     then 
         echo
         echo ">>>" Node already installed
