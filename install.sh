@@ -38,28 +38,15 @@ function add_new_user(){
     fi
 }
 
-
-function already_installed(){
-    res=$(type -p $1)
-    echo "this is $res"
-    if [[ 1 -ne 0 ]]
-    then 
-        return 1
-    else
-        return 1
-    fi
-}
-
 function update_upgrade(){
     echo
-    echo "${RED}Update packages and upgrade system"
-    #apt-get update -y
+    echo "$Update packages and upgrade system"
+    apt-get update -y
 }
 
 function install_curl(){
-    already_installed curl
-    echo $?
-    if [ $? -eq 0 ]
+    res=$(program_is_installed curl)
+    if [ "$res" -eq 1 ]
     then 
         echo
         echo ">>>" curl is already installed
@@ -67,22 +54,19 @@ function install_curl(){
 
         echo
         echo Installing curl
-        #apt-get install curl
+        apt-get install curl
     fi
 }
 
 function install_node(){
     res=$(program_is_installed nodejs)
-    echo "node res is $res"
+
     if [ "$res" -eq 1 ]
     then 
         echo
         echo ">>>" Node already installed
     else
         echo Installing NodeJS
-#        apt-get update
-#        apt-get install nodejs
-#        apt-get install npm
         curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
         sudo apt-get install -y nodejs
     fi
@@ -91,7 +75,6 @@ function install_node(){
 function install_pm2(){
     res=$(npm_package_is_installed pm2)
 
-    echo "pm2 res is $res"
     if [ "$res" -eq 1 ]
     then
         echo
@@ -99,7 +82,7 @@ function install_pm2(){
     else
         echo
         echo Intalling PM2
-#        npm i -g pm2
+        npm i -g pm2 -y
     fi
 }
 
