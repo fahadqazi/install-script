@@ -54,7 +54,7 @@ function install_curl(){
 
         echo
         echo Installing curl
-        apt-get install curl
+        apt-get install curl -y
     fi
 }
 
