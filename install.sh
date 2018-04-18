@@ -90,3 +90,4 @@ update_upgrade
 install_curl
 install_node
 install_pm2
+add_new_user
