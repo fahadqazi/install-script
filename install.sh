@@ -83,8 +83,9 @@ function install_node(){
 #        apt-get update
 #        apt-get install nodejs
 #        apt-get install npm
+        curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+        sudo apt-get install -y nodejs
     fi
-
 }
 
 function install_pm2(){
