@@ -22,27 +22,16 @@ function npm_package_is_installed(){
     fi
 }
 
-function user_exists(){
-    echo "Value of 1: $1"
-    local return_=1
-    type id "$1" >/dev/null 2>&1 { local return_0 }
-    echo "returning $return_"
-}
-
 function add_new_user(){
-    res=$(user_exists $USERNAME)
 
-    echo "Result of res: $res"
-    if [ "$UID" -ne "$ROOT_UID" ]
-
+    if [ "$UID" -eq "$ROOT_UID" ]
     then
         echo "Must be root user to run this script"
         exit 1
     else
-        grep -q "whoami" /etc/passwd
-        if [ $? -eq $SUCCESS ]
-        then
+        if id "$USERNAME" >/dev/null 2>&1; then
             echo "User $whoami already exists"
+            echo "User $USERNAME already exists too"
             exit 1
         else 
 #            sudo useradd --no-user-group --gid www-data --system --create-home \
