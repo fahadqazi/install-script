@@ -44,8 +44,8 @@ function add_new_user(){
             echo "User $whoami already exists"
             exit 1
         else 
-            sudo useradd --no-user-group --gid www-data --system --create-home \
-                --shell /usr/sbin/nologin $USERNAME
+#            sudo useradd --no-user-group --gid www-data --system --create-home \
+#                --shell /usr/sbin/nologin $USERNAME
             echo "Setting up Account"
         fi
     fi
