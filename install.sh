@@ -6,6 +6,7 @@
 ####################################
 
 USERNAME=origin-task-worker
+ROOT_UID=1000
 
 function program_is_installed(){
     local return_=1
@@ -19,8 +20,20 @@ function npm_package_is_installed(){
     echo "$return_"
 }
 
+function user_exists(){
+    local return_=1
+    type id "$1" >/dev/null 2>&1 { local return_0 }
+    echo "$return_"
+}
+
 function add_new_user(){
+    echo "1: $UID"
+    echo "2: $ROOT_UID"
+    res=$(user_exists $USERNAME)
+
+    echo "Result of res: $res"
     if [ "$UID" -ne "$ROOT_UID" ]
+
     then
         echo "Must be root user to run this script"
         exit 1
@@ -86,8 +99,8 @@ function install_pm2(){
     fi
 }
 
-update_upgrade
-install_curl
-install_node
-install_pm2
+#update_upgrade
+#install_curl
+#install_node
+#install_pm2
 add_new_user
