@@ -30,8 +30,7 @@ function add_new_user(){
         exit 1
     else
         if id "$USERNAME" >/dev/null 2>&1; then
-            echo "User $whoami already exists"
-            echo "User $USERNAME already exists too"
+            echo "User $USERNAME already exists"
             exit 1
         else 
 #            sudo useradd --no-user-group --gid www-data --system --create-home \
