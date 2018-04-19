@@ -15,20 +15,21 @@ function program_is_installed(){
 }
 
 function npm_package_is_installed(){
-    local return_=1
-    type $1 >/dev/null 2>&1 || { local return_=0; }
-    echo "$return_"
+    if [ id -u "$1" >/dev/null 2>&1 ]; then
+        echo "user exists"
+    else
+        echo "user doesn't exist"
+    fi
 }
 
 function user_exists(){
+    echo "Value of 1: $1"
     local return_=1
     type id "$1" >/dev/null 2>&1 { local return_0 }
-    echo "$return_"
+    echo "returning $return_"
 }
 
 function add_new_user(){
-    echo "1: $UID"
-    echo "2: $ROOT_UID"
     res=$(user_exists $USERNAME)
 
     echo "Result of res: $res"
