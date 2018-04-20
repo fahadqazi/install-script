@@ -42,12 +42,19 @@ function add_new_user(){
 
 function update_upgrade(){
     echo
-    echo "$Update packages and upgrade system"
-    apt-get update -y
+    if [ "$UID" -eq "$ROOT_UID" ]
+    then
+        echo "Must be root user to run this script"
+        exit 1
+    else
+        echo "Update packages and upgrade system"
+        apt-get update -y
+    fi
 }
 
 function install_curl(){
     res=$(program_is_installed curl)
+
     if [ "$res" -eq 1 ]
     then 
         echo
@@ -76,8 +83,7 @@ function install_node(){
 
 function install_pm2(){
     res=$(npm_package_is_installed pm2)
-    echo "this result of pm2 isntall: $res"
-# todo: error investigate
+
     if [ "$res" -eq 1 ]
     then
         echo
