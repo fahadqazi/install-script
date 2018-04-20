@@ -78,7 +78,8 @@ function install_node(){
 
 function install_pm2(){
     res=$(npm_package_is_installed pm2)
-
+    echo "this result of pm2 isntall: $res"
+# todo: error investigate
     if [ "$res" -eq 1 ]
     then
         echo
