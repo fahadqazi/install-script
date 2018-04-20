@@ -17,11 +17,9 @@ function program_is_installed(){
 }
 
 function npm_package_is_installed(){
-    if [ id -u "$1" >/dev/null 2>&1 ]; then
-        echo "user exists"
-    else
-        echo "user doesn't exist"
-    fi
+    local return_=1
+    type $1 >/dev/null 2>&1 || { local return_=0; }
+    echo "$return_"
 }
 
 function add_new_user(){
