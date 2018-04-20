@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/fahadqazi/install-script/issues"
   },
-  "homepage": "https://github.com/fahadqazi/install-script#readme"
+  "homepage": "https://github.com/fahadqazi/install-script#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.3",
+    "lodash": "^4.17.5"
+  }
 }
